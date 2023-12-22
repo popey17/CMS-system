@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -29,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/customer';
+    protected $redirectTo = '/user';
 
     /**
      * Create a new controller instance.
@@ -53,10 +54,9 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:5120'],
+            'profile_image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:5120'],
             'role_id' => ['required', 'integer'],
-            'store_id' => ['required', 'integer'],
-            'note' => ['string', 'max:255'],
+            'store_id' => ['required'],
         ]);
     }
 
@@ -68,22 +68,41 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if($data['profile_image'] != null) {
+        if(isset($data['profile_image']) && $data['profile_image'] != null) {
             $imageName = time().'.'.$data['profile_image']->extension();  
             $data['profile_image']->move(public_path('img/profile/'), $imageName);
         }else {
             $imageName = null;
         }
 
+        $store = $data['states'];
 
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role_id'=> $data['role_id'],
-            'store_id' => $data['store_id'],
             'profile_pic' => $imageName,
             'note' => $data['note'],
         ]);
+
+        $user->stores()->attach($store);
+
+        return $user;
+    }
+
+    protected function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        $user = $this->create($request->all());
+        // Comment the following line to prevent auto-login
+        // $this->guard()->login($user);
+
+        return redirect($this->redirectPath());
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        // Do nothing or add custom logic
     }
 }

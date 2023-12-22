@@ -1,7 +1,4 @@
 @extends('layouts.app')
-@isset($data)
-    {{ $data }}
-@endisset
 @section('content')
 <div class="main__content__container">
     <div class="side__menu {{ session('sidebarState') }}">
@@ -19,12 +16,13 @@
         <div class="content__header">
             <button class="sub__menu-toggle"><i class="fa-solid fa-bars"></i></button>
         </div>
-        <div class="content__body">
+        <div class="content__body register">
             <div class="register__container">
+
                 <div class="">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
-                        <div class="row mb-3">
+                        <div class="row mb-3 align-items-end">
                             <div class="col-md-4">
                                 <div class="preview__img__container">
                                     <label for="profile_image">
@@ -45,7 +43,7 @@
                                     <label for="name" class="col-md-4 col-form-label">{{ __('Name') }}</label>
         
                                     <div class="">
-                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
         
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
@@ -55,11 +53,11 @@
                                     </div>
                                 </div>
         
-                                <div class=" mb-3">
+                                <div class="">
                                     <label for="email" class="col-md-4 col-form-label">{{ __('Email Address') }}</label>
         
                                     <div class="">
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                        <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
         
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -76,22 +74,21 @@
                             <label for="password" class="col-md-4 col-form-label">{{ __('Password') }}</label>
 
                             <div class="password__container">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
                                 <i class="fa-solid fa-eye password__toggle hide"></i>
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class=" mb-3">
                             <label for="password-confirm" class="col-md-4 col-form-label">{{ __('Confirm Password') }}</label>
 
                             <div class="password__container">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
                             </div>
                         </div>
 
@@ -99,20 +96,22 @@
                             <div class="col-md-6">
                                 <label for="store-id" class="col-md-4 col-form-label">{{ __('Store ID') }}</label>
                                 <div class="select">
-                                    <select id="store-id" class="form-control" name="store_id" required>
-                                        <option value="">Select Role</option>
-                                        <option value="1">Store 1</option>
-                                        <option value="2">Store 2</option>
+                                    <select class="js-example-basic-multiple" style="width: 100%" name="states[]" multiple="multiple">
+                                        <?php $stores = App\Models\Store::all(); ?>
+                                        @foreach ($stores as $store)
+                                            <option value="{{$store->id}}">{{$store->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="role-id" class="col-md-4 col-form-label">{{ __('Role ID') }}</label>
                                 <div class="select">
-                                    <select id="role-id" class="form-control" name="role_id" required>
-                                        <option value="">Select Store</option>
-                                        <option value="1">Store 1</option>
-                                        <option value="2">Store 2</option>
+                                    <select id="role-id" class="form-control" name="role_id">
+                                        <?php $roles = App\Models\Role::all(); ?>
+                                        @foreach ($roles as $role)
+                                            <option value="{{$role->id}}">{{$role->name}}</option>  
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -122,7 +121,7 @@
                             <label for="note" class="col-md-4 col-form-label">{{ __('Note') }}</label>
 
                             <div class="">
-                                <textarea name="note" id="mytextarea"></textarea>
+                                <textarea name="note" id="mytextarea">{{ old('note') }}</textarea>
                             </div>
                         </div>
 
@@ -144,6 +143,10 @@
 <script>
     tinymce.init({
         selector: '#mytextarea'
+    });
+
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
     });
 </script>
 @endsection

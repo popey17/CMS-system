@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class location extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+    ];
+    public function store()
+    {
+        return $this->hasMany(store::class);
+    }
 }

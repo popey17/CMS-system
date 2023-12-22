@@ -1,7 +1,10 @@
 @extends('layouts.app')
-
 @section('content')
-{{-- {{$users}} --}}
+@if(session('success'))
+    <div class="notification notification-popup" role="alert">
+        <strong>Success!</strong> {!! session('success') !!}
+    </div>
+@endif
 <div class="main__content__container">
     <div class="side__menu {{ session('sidebarState') }}">
         <div class="side__menu__header">
@@ -14,7 +17,7 @@
             </ul>
         </div>
     </div>
-    <div class="main__content__item {{ session('sidebarState') }}">
+    <div class="main__content__item {{ session('sidebarState') }} {{ session('rightSidebarState') }}">
         <div class="content__header">
             <button class="sub__menu-toggle"><i class="fa-solid fa-bars"></i></button>
             <div>
@@ -24,21 +27,50 @@
         </div>
         <div class="content__body">
             <div class="content__body__item">
-                <button class="right__bar-toggle">right bar</button>
-                @foreach ($users as $user){
-                    <h2>{{ $user }}</h2>
-                }
-                    
-                @endforeach
-            </div>
-            {{  $users->links() }}
+                <div class="sort__control">
+                    <div class="sort__icon__wrapper ">
+                        <span data-sort='id'>Id</span>
+                        <div class="sort__icon">
+                            <button class="sort_btn" data-order="ASC"><i class="fa-solid fa-sort-up"></i></button>
+                            <button class="sort_btn" data-order="DESC"><i class="fa-solid fa-sort-down"></i></button>
+                        </div>
+                    </div>
+                    <div class="sort__icon__wrapper">
+                        <span data-sort='name'>Name</span>
+                        <div class="sort__icon">
+                            <button class="sort_btn" data-order="ASC"><i class="fa-solid fa-sort-up"></i></button>
+                            <button class="sort_btn" data-order="DESC"><i class="fa-solid fa-sort-down"></i></button>
+                        </div>
+                    </div>
+                    <div class="sort__icon__wrapper">
+                        <span data-sort='store_id'>Store</span>
+                        <div class="sort__icon">
+                            <button class="sort_btn" data-order="ASC"><i class="fa-solid fa-sort-up"></i></button>
+                            <button class="sort_btn" data-order="DESC"><i class="fa-solid fa-sort-down"></i></button>
+                        </div>
+                    </div>
+                    <div class="sort__icon__wrapper">
+                        <span data-sort='role_id'>Role</span>
+                        <div class="sort__icon">
+                            <button class="sort_btn" data-order="ASC"><i class="fa-solid fa-sort-up"></i></button>
+                            <button class="sort_btn" data-order="DESC"><i class="fa-solid fa-sort-down"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card__container__wrapper">
+                    @include('_components.user.card')
+                </div>
+            </div>           
         </div>  
-        <div class="side__bar__right">
-            <button class="right__menu-close"><i class="fa-solid fa-arrow-right"></i></button>
+        <div class="side__bar__right {{ session('rightSidebarState') }}">
+            <div class="top">
+                <button class="right__menu-close"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+            <div class="right__content">
+                {{-- @include('_components.user.detail') --}}
+            </div>
         </div>     
     </div>
-    
-
 </div>
 @endsection
 
