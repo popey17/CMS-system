@@ -56,7 +56,7 @@ class UserController extends Controller
             'name' => 'required',
             'profile_image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:5120'],
             'role_id' => ['required', 'integer'],
-            // 'store_id' => ['required'],
+            'stores' => ['required'],
         ]);
 
         if(isset($request['profile_image']) && $request['profile_image'] != null) {
@@ -66,7 +66,7 @@ class UserController extends Controller
             $imageName = null;
         }
 
-        $store = $request->states;
+        $store = $request->stores;
 
         $user = User::find($id);
         $user->name = $request->name;

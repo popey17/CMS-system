@@ -94,18 +94,25 @@
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="store-id" class="col-md-4 col-form-label">{{ __('Store ID') }}</label>
+                                <label for="store-id" class="col-md-4 col-form-label">{{ __('Store') }}</label>
                                 <div class="select">
-                                    <select class="js-example-basic-multiple" style="width: 100%" name="states[]" multiple="multiple">
+                                    <select class="js-example-basic-multiple" style="width: 100%" name="stores[]" multiple="multiple">
                                         <?php $stores = App\Models\Store::all(); ?>
                                         @foreach ($stores as $store)
-                                            <option value="{{$store->id}}">{{$store->name}}</option>
+                                            <option value="{{ $store->id }}" {{ in_array($store->id, old('stores', [])) ? 'selected' : '' }}>
+                                                {{ $store->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
+                                @error('stores')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-md-6">
-                                <label for="role-id" class="col-md-4 col-form-label">{{ __('Role ID') }}</label>
+                                <label for="role-id" class="col-md-4 col-form-label">{{ __('Role') }}</label>
                                 <div class="select">
                                     <select id="role-id" class="form-control" name="role_id">
                                         <?php $roles = App\Models\Role::all(); ?>

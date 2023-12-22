@@ -73,15 +73,15 @@
                             <div class="col-md-6">
                                 <label for="store-id" class="col-md-4 col-form-label">{{ __('Store ID') }}</label>
                                 <div class="select">
-                                    <select class="js-example-basic-multiple" style="width: 100%" name="states[]" multiple="multiple">
+                                    <select class="js-example-basic-multiple" style="width: 100%" name="stores[]" multiple="multiple">
                                         <?php $stores = App\Models\Store::all(); ?>
                                         @foreach ($stores as $store)
-                                            <option value="{{ $store->id }}" {{ in_array($store->id, $selectedStores) ? 'selected' : '' }}>
+                                            <option value="{{ $store->id }}" {{ in_array($store->id, old('stores', $selectedStores)) ? 'selected' : '' }} >
                                                 {{ $store->name }}
                                             </option>                                       
                                         @endforeach
                                     </select>
-                                    @error('store_id')
+                                    @error('stores')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

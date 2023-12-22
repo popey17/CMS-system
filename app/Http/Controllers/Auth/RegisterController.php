@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'profile_image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:5120'],
             'role_id' => ['required', 'integer'],
-            'store_id' => ['required'],
+            'stores' => ['required'],
         ]);
     }
 
@@ -75,7 +75,7 @@ class RegisterController extends Controller
             $imageName = null;
         }
 
-        $store = $data['states'];
+        $store = $data['stores'];
 
         $user = User::create([
             'name' => $data['name'],
