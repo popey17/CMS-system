@@ -14,7 +14,7 @@
         <div class="side__menu__links">
             <ul>
                 <li class="active"><a href="/customer">Customers</a></li>
-                <li><a href="/customer/add">Add New Customer</a></li>
+                <li><a href="/customer/create">Add New Customer</a></li>
                 <li><a href="/customer/bin">Recover Customer</a></li>
             </ul>
         </div>

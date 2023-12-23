@@ -91,7 +91,7 @@ class CustomerController extends Controller
         $user = customer::find($id);
         $user->deleted = false;
         $user->save();
-        return redirect('/customer/bin')->with('success', "User <span class='text-primary'>$user->name</span> has been deleted");
+        return redirect('/customer/bin')->with('success', "User <span class='text-primary'>$user->name</span> has been restored");
     }
 
     public function bin ()
@@ -121,5 +121,43 @@ class CustomerController extends Controller
         $user = customer::find($id);
         $user->delete();
         return redirect('/customer/bin')->with('success', "User <span class='text-primary'>$user->name</span> has been completely deleted");
+    }
+
+    public function create()
+    {
+        $customerIdString = Customer::orderBy('created_at', 'desc')->first()->customer_id;
+        $parts = explode('-', $customerIdString);
+        $customerId = $parts[1]+1;
+        return view('customer.create')->with('customerId', $customerId);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'customer_id' => ['required','unique:customers,customer_id'],
+            'created_date' => ['required', 'date'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['email'],
+            'address' => [ 'string', 'required'],
+            'phone' => ['required'],
+            'store_id' => ['required', 'integer'],
+        ]);
+
+        $customer = new Customer();
+        $customer->customer_id = $request->customer_id;
+        $customer->created_date = $request->created_date;
+        $customer->name = $request->name;
+        $customer->address = $request->address;
+        $customer->phone = $request->phone;
+        $customer->store_id = $request->store_id;
+        $customer->birthday = $request->birthday;
+        $customer->gurdian_phone = $request->gurdian_phone;
+        $customer->email = $request->email;
+        $birthday = new \DateTime($request->birthday);
+        $today = new \DateTime('today');
+        $customer->age = $birthday->diff($today)->y;
+        $customer->save();
+
+        return redirect('/customer')->with('success', "Customer <span class='text-primary'>$customer->name</span> has been created");
     }
 }

@@ -583,7 +583,8 @@ body {
                                 border-radius: 0;
                                 background-color: unset;
                             }
-                            #email,#name,#role-id, #name{
+                            #email,#name,#role-id, #name, #phone, #gurdian-phone, #customer_id
+                            ,#address ,#birthday, #created_date, #store_id {
                                 border: var(--bs-border-width) solid var(--bs-border-color);
                                 border-radius: var(--bs-border-radius);
                             }

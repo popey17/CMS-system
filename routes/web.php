@@ -42,6 +42,8 @@ Route::get('/customer/bin', [CustomerController::class, 'bin'])->name('bin');
 Route::get('/customer/bin/sort', [CustomerController::class, 'binSort'])->name('binSort');
 Route::get('/customer/bin/search', [CustomerController::class, 'binSearch'])->name('binSearch');
 Route::get('/customer/{id}/purge', [CustomerController::class, 'purge']);
+Route::get('/customer/create', [CustomerController::class, 'create'])->name('customer.create');
+Route::post('/customer/store', [CustomerController::class, 'store'])->name('customer.store');
 
 
 
@@ -63,7 +65,7 @@ Route::get('/user/sort', [UserController::class, 'sort'])->name('sort');
 
 //Sidebar Session
 Route::post('/save-sidebar-state', [SidebarController::class, 'store']);
-Route::post('/save-right-sidebar-state', [SidebarController::class, 'rightStore']);
+// Route::post('/save-right-sidebar-state', [SidebarController::class, 'rightStore']);
 
 //Redirect Urls
 

@@ -82,19 +82,19 @@ $(document).ready(function() {
         $('.side__bar__right').addClass('right__bar__active');
         $('.main__content__item').addClass('right__bar__active');
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     }
+        // });
 
-        $.ajax({
-            url: '/save-right-sidebar-state',
-            type: 'POST',
-            data: {
-                rightSidebarState: 'right__bar__active'
-            }
-        });
+        // $.ajax({
+        //     url: '/save-right-sidebar-state',
+        //     type: 'POST',
+        //     data: {
+        //         rightSidebarState: 'right__bar__active'
+        //     }
+        // });
     }
 
     //close right bar and save sesstion function
@@ -102,19 +102,19 @@ $(document).ready(function() {
         $('.side__bar__right').removeClass('right__bar__active');
         $('.main__content__item').removeClass('right__bar__active');
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     }
+        // });
 
-        $.ajax({
-            url: '/save-right-sidebar-state',
-            type: 'POST',
-            data: {
-                rightSidebarState: ''
-            }
-        });
+        // $.ajax({
+        //     url: '/save-right-sidebar-state',
+        //     type: 'POST',
+        //     data: {
+        //         rightSidebarState: ''
+        //     }
+        // });
     }
 
     //call open right bar function

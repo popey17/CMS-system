@@ -16,8 +16,8 @@ class SidebarController extends Controller
     session(['sidebarState' => $request->sidebarState]);
     }
 
-    public function rightStore(Request $request)
-    {
-    session(['rightSidebarState' => $request->rightSidebarState]);
-    }
+    // public function rightStore(Request $request)
+    // {
+    // session(['rightSidebarState' => $request->rightSidebarState]);
+    // }
 }
