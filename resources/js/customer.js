@@ -25,7 +25,7 @@ $(document).ready(function() {
         });
     });
 
-    //ajax Sort
+    //ajax bin Sort
     $(document).on('click', '.deleted_customer_sort_btn', function() {
         var sort = $(this).parent().prev('span').attr('data-sort');
         var order = $(this).attr('data-order');

@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/user.js',
                 'resources/js/customer.js',
+                'resources/js/sale.js',
             ],
             refresh: true,
         }),

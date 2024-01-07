@@ -6,7 +6,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\ServiceRecordController;
+use App\Http\Controllers\TempFileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/test', [TestController::class, 'index']);
 
 Auth::routes();
 
@@ -44,8 +50,36 @@ Route::get('/customer/bin/search', [CustomerController::class, 'binSearch'])->na
 Route::get('/customer/{id}/purge', [CustomerController::class, 'purge']);
 Route::get('/customer/create', [CustomerController::class, 'create'])->name('customer.create');
 Route::post('/customer/store', [CustomerController::class, 'store'])->name('customer.store');
+Route::get('/customer/{id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+Route::post('/customer/{id}/edit', [CustomerController::class, 'update'])->name('customer.update');
+Route::get('/customer/{id}/detail', [CustomerController::class, 'detail'])->name('customer.detail');
 
 
+// Sale
+Route::get('/sale', [SaleController::class, 'index'])->name('sale');
+Route::get('/sale/sort', [SaleController::class, 'sort'])->name('sale.sort');
+Route::get('/sale/fetch_data', [SaleController::class, 'fetch_data']);
+Route::get('/sale/{id}/delete', [SaleController::class, 'sendToBin']);
+Route::get('/sale/bin', [SaleController::class, 'bin'])->name('sale.bin');
+Route::get('/sale/bin/sort', [SaleController::class, 'binSort'])->name('binSort');
+Route::get('/sale/{id}/purge', [SaleController::class, 'purge']);
+Route::get('/sale/create', [SaleController::class, 'create'])->name('sale.create');
+Route::post('/sale/create', [SaleController::class, 'store'])->name('sale.store');
+Route::get('/sale/search', [SaleController::class, 'search'])->name('search');
+Route::get('/sale/bin/search', [SaleController::class, 'binSearch'])->name('binSearch');
+Route::get('/sale/{id}/detail', [SaleController::class, 'detail'])->name('customer.detail');
+
+
+
+//service records
+Route::get('/service-record', [ServiceRecordController::class, 'index'])->name('service');
+Route::get('/service-record/create', [ServiceRecordController::class, 'create'])->name('service.create');
+
+
+
+
+//dropdown Ajax
+Route::get('/sale/getStore', [SaleController::class, 'getStoreList']);
 
 
 
@@ -67,5 +101,11 @@ Route::get('/user/sort', [UserController::class, 'sort'])->name('sort');
 Route::post('/save-sidebar-state', [SidebarController::class, 'store']);
 // Route::post('/save-right-sidebar-state', [SidebarController::class, 'rightStore']);
 
-//Redirect Urls
+//test
 
+Route::post('/testSubmit', [TestController::class, 'testSubmit'])->name('test.submit');
+
+
+//fildpond
+Route::post('/temp-upload', [TempFileController::class, 'upload'])->name('temp.upload');
+Route::delete('/temp-delete', [TempFileController::class, 'delete'])->name('temp.delete');

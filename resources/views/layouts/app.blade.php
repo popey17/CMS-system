@@ -13,6 +13,8 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet"/>
     
 
     <!-- Css -->
@@ -68,7 +70,12 @@
                         </li>
                         <li>
                             <div data-title="Sales">
-                                <a href="{{ url('/sales')}}" class="nav-item"><i class="fa-solid fa-receipt"></i></a>
+                                <a href="{{ url('/sale')}}" class="nav-item"><i class="fa-solid fa-receipt"></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div data-title="Services">
+                                <a href="{{ url('/service-record')}}" class="nav-item"><i class="fa-solid fa-notes-medical"></i></i></a>
                             </div>
                         </li>
                     </ul>
@@ -81,7 +88,7 @@
                         </a>
                         
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu--end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">

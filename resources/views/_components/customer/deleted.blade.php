@@ -14,8 +14,10 @@
             <p>{{ \Carbon\Carbon::parse($customer->created_date)->format('d M Y') }}</p>    
         </div>
         <div class='list__item'>
-            <button class="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">...</button>
+            <a class="btn" href="/customer/{{$customer->id}}/detail">detail</a>
+            <button class="dropdown_btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">...</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                
                 <button class="dropdown-item customer-restore" data-toggle="modal" data-name="{{ $customer->name}}" data-id="{{$customer->id}}" data-target="#restoreCustomerBox">Restore</button>
                 <button class="dropdown-item customer-restore" data-toggle="modal" data-name="{{ $customer->name}}" data-id="{{$customer->id}}" data-target="#purgeCustomerBox">Delete</button>
                 {{-- <a class="dropdown-item customer-delete" href="/customer/{{$customer->id}}/delete">Delete</a> --}}
@@ -53,7 +55,7 @@
             <div class="modal-body">
                 <div class="alert-icon"><i class="fa-solid fa-exclamation"></i></div>
                 <p class="alert-title">Are you sure?</p>
-                <p class="alert-body">Do you really want to restore the customer <span class="delete-customer"></span>? This is permenent action.</p>
+                <p class="alert-body">Do you really want to delete the customer <span class="delete-customer"></span>? This is permenent action.</p>
                 <div class="footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
                     <a href="#" type="button" class="btn btn-danger customer_purge">Delete</a>

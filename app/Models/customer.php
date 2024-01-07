@@ -12,4 +12,14 @@ class customer extends Model
     {
         return $this->belongsTo(store::class);
     }
+
+    public function serviceRecord()
+    {
+        return $this->hasMany(servicerecord::class);
+    }
+
+    public function sale()
+    {
+        return $this->hasMany(sale::class);
+    }
 }

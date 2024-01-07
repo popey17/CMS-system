@@ -37,4 +37,9 @@ class store extends Model
     {
         return $this->belongsToMany(User::class,'user_stores', 'store_id');
     }
+
+    public function sale()
+    {
+        return $this->hasMany(sale::class);
+    }
 }

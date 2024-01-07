@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\customer;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CustomerController extends Controller
 {
@@ -139,6 +140,7 @@ class CustomerController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['email'],
             'address' => [ 'string', 'required'],
+            'birthday' => ['nullable','date','before_or_equal:today'],
             'phone' => ['required'],
             'store_id' => ['required', 'integer'],
         ]);
@@ -159,5 +161,48 @@ class CustomerController extends Controller
         $customer->save();
 
         return redirect('/customer')->with('success', "Customer <span class='text-primary'>$customer->name</span> has been created");
+    }
+
+    public function edit ($id)
+    {
+        $customer = Customer::find($id);
+        return view('customer.edit')->with('customer', $customer);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'customer_id' => ['required', Rule::unique('customers')->ignore($id)],
+            'created_date' => ['required', 'date'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['email'],
+            'birthday' => ['nullable','date','before_or_equal:today'],
+            'address' => [ 'string', 'required'],
+            'phone' => ['required'],
+            'store_id' => ['required', 'integer'],
+        ]);
+
+        $customer = Customer::find($id);
+        $customer->customer_id = $request->customer_id;
+        $customer->created_date = $request->created_date;
+        $customer->name = $request->name;
+        $customer->address = $request->address;
+        $customer->phone = $request->phone;
+        $customer->store_id = $request->store_id;
+        $customer->birthday = $request->birthday;
+        $customer->gurdian_phone = $request->gurdian_phone;
+        $customer->email = $request->email;
+        $birthday = new \DateTime($request->birthday);
+        $today = new \DateTime('today');
+        $customer->age = $birthday->diff($today)->y;
+        $customer->save();
+
+        return redirect('/customer')->with('success', "Customer <span class='text-primary'>$customer->name</span> has been updated");
+    }
+
+    public function detail($id)
+    {
+        $customer = Customer::find($id);
+        return view('customer.detail')->with('customer', $customer);
     }
 }

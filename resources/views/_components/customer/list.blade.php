@@ -1,26 +1,29 @@
 @foreach ($customers as $customer)
     <div class="list__item__container">
-        <div class='list__item'>
-            <p>{{ $customer->customer_id}}</p>
-        </div>
-        <div class='list__item'>           
-                <p>{{ $customer->name}}</p>
-        </div>
-        <div class='list__item'>
-            <p>{{ $customer->store->name}}</p>
-        </div>
-        <div class='list__item'>
-            <p>{{ \Carbon\Carbon::parse($customer->created_date)->format('d M Y') }}</p>    
-        </div>
-        <div class='list__item'>
-            <button class="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">...</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item customer-edit" href="/customer/{{$customer->id}}/edit">Edit</a>
-                {{-- <a class="dropdown-item customer-delete" href="/customer/{{$customer->id}}/delete">Delete</a> --}}
-                <button class="dropdown-item customer-delete" data-toggle="modal" data-name="{{ $customer->name}}" data-id="{{$customer->id}}" data-target="#deleteCustomerBox">Delete</button>
-                
+        {{-- <a href=""> --}}
+            <div class='list__item'>
+                <p>{{ $customer->customer_id}}</p>
             </div>
-        </div>
+            <div class='list__item'>           
+                    <p>{{ $customer->name}}</p>
+            </div>
+            <div class='list__item'>
+                <p>{{ $customer->store->name}}</p>
+            </div>
+            <div class='list__item'>
+                <p>{{ \Carbon\Carbon::parse($customer->created_date)->format('d M Y') }}</p>    
+            </div>
+            <div class='list__item'>
+                <a class="btn" href="/customer/{{$customer->id}}/detail">detail</a>
+                <button class="dropdown_btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">...</button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item customer-edit" href="/customer/{{$customer->id}}/edit">Edit</a>
+                    {{-- <a class="dropdown-item customer-delete" href="/customer/{{$customer->id}}/delete">Delete</a> --}}
+                    <button class="dropdown-item customer-delete" data-toggle="modal" data-name="{{ $customer->name}}" data-id="{{$customer->id}}" data-target="#deleteCustomerBox">Delete</button>
+                    
+                </div>
+            </div>
+        </a>
     </div>
 @endforeach
 

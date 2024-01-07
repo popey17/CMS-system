@@ -583,7 +583,7 @@ body {
                                 border-radius: 0;
                                 background-color: unset;
                             }
-                            #email,#name,#role-id, #name, #phone, #gurdian-phone, #customer_id
+                            #email,#name,#role-id, #name, #phone, #gurdian_phone, #customer_id
                             ,#address ,#birthday, #created_date, #store_id {
                                 border: var(--bs-border-width) solid var(--bs-border-color);
                                 border-radius: var(--bs-border-radius);
@@ -609,7 +609,7 @@ body {
                                 left: 0;
                                 right: 0;
                                 z-index: 100;
-                                &.customer{
+                                &.customer, &.sale{
                                     padding: 0 50px;
                                     .sort__icon__wrapper{
                                         flex: 1;
@@ -617,10 +617,11 @@ body {
                                             flex: 0.3;
                                         }
                                         &:last-child {
-                                            flex: 0.2;
+                                            flex: 0.3;
                                         }
                                     }   
                                 }
+                                
                                 .sort__icon__wrapper {
                                     justify-content: flex-start;
                                     align-items: center;
@@ -661,6 +662,24 @@ body {
                                         
                                     }
                                     
+                                }
+                            }
+                            .customer__info {
+                                height: object-fit;
+                                // background-color: #fdf9f9db;
+                                margin:0 -30px;
+                                display: block;
+                                padding: 20px 30px;
+                                position: relative;
+                                top: 0;
+                                left: 0;
+                                right: 0;
+                                z-index: 100;
+                                p.info__label {
+                                    font-size: 12px;
+                                    font-weight: bold;
+                                    margin-bottom: 0;
+                                    color: #90a9dd;
                                 }
                             }
                             .card__container__wrapper {
@@ -717,10 +736,6 @@ body {
                                                         padding: 0 5px;
                                                     // flex-direction: row;
                                                     }
-                                                }
-                                                &__role {
-                                                    // margin: 0;
-
                                                 }
                                             }
                                         }
@@ -783,12 +798,15 @@ body {
                                             flex: 0.3;
                                         }
                                         &:last-child {
-                                            flex: 0.2;
+                                            flex: 0.3;
                                         }
-                                        // a{
-                                        //     text-decoration: none;
-                                        //     color: #000;
-                                        // }
+                                        a{
+                                            text-decoration: none;
+                                            color: #000;
+                                            border: var(--bs-border-width) solid var(--bs-border-color);
+                                            border-radius: 5px;
+                                            margin-right: 10px;
+                                        }
                                         p {
                                             margin: 0;
                                         }
@@ -807,10 +825,20 @@ body {
                                         }
                                         a.dropdown-item {
                                             color: #000;
+                                            border: none;
                                             // padding: 5px;
                                             &:hover {
                                                 background: #90a9dd75;
                                             }
+                                        }
+                                        a.btn {
+                                            &:hover {
+                                                background: #90a9dd75;
+                                            }
+                                        }
+                                        button.dropdown_btn {
+                                            line-height: 32px;
+                                            // font-size: 16px;
                                         }
                                     }
                                 }
@@ -1061,4 +1089,5 @@ body {
             }
         }
     }
+    
 }

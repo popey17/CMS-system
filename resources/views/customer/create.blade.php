@@ -16,7 +16,7 @@
             <ul>
                 <li><a href="/customer">Customers</a></li>
                 <li class="active"><a href="/customer/create">Add New Customer</a></li>
-                <li><a href="/customer/bin">Recover Customer</a></li>
+                <li><a href="/customer/bin">Recover Data</a></li>
             </ul>
         </div>
     </div>
@@ -33,7 +33,7 @@
                 <div class="register__container">
 
                     <div class="">
-                        <form method="POST" action="{{ route('customer.store') }}">
+                        <form method="POST" action="{{ route('sale.store') }}">
                             @csrf
                             <div class="row mb-3">
                                 <div class="col-md-6">
@@ -79,12 +79,12 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="store_id" class="col-md-4 col-form-label">{{ __('store')}}</label>
+                                <label for="store_id" class="col-md-4 col-form-label">{{ __('Store')}}</label>
                                 <div class="">
                                     <select name="store_id" id="store_id" class="form-control @error('store_id') is-invalid @enderror">
                                         <option value="">Select Store</option>
                                         @foreach (Auth::user()->stores as $store)
-                                            <option value="{{$store->id}}">{{$store->name}}</option>
+                                            <option value="{{$store->id}}" {{ old('store_id') == $store->id ? 'selected' : '' }}>{{$store->name}}</option>
                                         @endforeach
                                     </select>
     

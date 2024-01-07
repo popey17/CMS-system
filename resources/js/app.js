@@ -191,7 +191,7 @@ $(document).ready(function() {
             url:`/${urlMain}/fetch_data?page=`+page,
             type:'GET',
             success:function(data) {
-            // console.log(data);
+            console.log(data);
             $('.card__container__wrapper').html(data);
             $('.content__body').animate({ scrollTop: 0 }, 'fast'); 
             }
